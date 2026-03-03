@@ -1,14 +1,21 @@
 const apiEndpoint = 'https://73nhe22wt4.execute-api.ap-southeast-4.amazonaws.com/default/incrementVisitorCount';
+
+
+const visitorCountElement = document.getElementById('visitor-count');
+
 window.onload = () => {
-    console.log("script running")
+    console.log("Script running...");
 
-    fetch(apiEndpoint, {
-        method: 'POST',
-        headers: {
-        },
+    if(!visitorCountElement) console.error('Visitor count element not found!');
 
-    })
-    .then(response => response.json())
-    .then(data => console.log('Success:', data))
-    .catch((error) => console.error('Error:', error));
+    fetch(apiEndpoint, { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+            console.log('API data:', data);
+
+            if(visitorCountElement) {
+                visitorCountElement.textContent = `Visitor Count: ${data.visitor_count}`;
+            }
+        })
+        .catch(error => console.error('Fetch error:', error));
 };
