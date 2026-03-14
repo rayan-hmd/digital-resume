@@ -8,7 +8,7 @@ test('API returns visitor count', async ({ request }) => {
     const data = await response.json();
 
     expect(data).toHaveProperty("visitor_count");
-    expect(typeof data.count).toBe("number");
+    expect(typeof data.visitor_count).toBe("number");
 
 });
 
