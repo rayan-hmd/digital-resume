@@ -8,6 +8,9 @@ permissions:
   id-token: write
 
 env:
+  TF_VAR_acm_certificate_arn: ${{ vars.ACM_CERTIFICATE_ARN }}
+  TF_VAR_domain_name: ${{ vars.DOMAIN_NAME }}
+  TF_VAR_bucket_name: ${{ vars.S3_BUCKET_NAME }}
   SITE_URL: ${{ vars.SITE_URL || 'https://www.rayanhameed.com' }}
   API_URL: ${{ vars.API_URL || 'https://73nhe22wt4.execute-api.ap-southeast-4.amazonaws.com/default/incrementVisitorCount' }}
 jobs:
