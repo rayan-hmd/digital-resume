@@ -1,0 +1,5 @@
+bucket         = "rayanhameed-terraform-state"
+key            = "digital-resume/infra/terraform.tfstate"
+region         = "ap-southeast-4"
+dynamodb_table = "terraform-state-locks"
+encrypt        = true
