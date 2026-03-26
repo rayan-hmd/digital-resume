@@ -1,0 +1,34 @@
+name: CD
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  SITE_URL: ${{ vars.SITE_URL || 'https://www.rayanhameed.com' }}
+  API_URL: ${{ vars.API_URL || 'https://73nhe22wt4.execute-api.ap-southeast-4.amazonaws.com/default/incrementVisitorCount' }}
+jobs:
+    deploy-infrastructure-and-frontend:
+        timeout-minutes: 60
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v4
+        - uses: hashicorp/setup-terraform@v4
+        - uses: aws-actions/configure-aws-credentials@v4
+          with:
+            role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+            aws-region: ${{ vars.AWS_REGION || 'ap-southeast-4' }}
+        - run: aws sts get-caller-identity
+        - name: Terraform initialization
+          run: terraform -chdir=infra init
+        - name: Terraform plan
+          run: terraform -chdir=infra plan -out=tfplan
+        - name: Terraform apply
+          run: terraform -chdir=infra apply -auto-approve tfplan
+        - name: sync S3 bucket
+          run: aws s3 sync frontend/ s3://${{ vars.S3_BUCKET_NAME || 'rayanhameed-resume' }} --delete
+        - name: Invalidate CloudFront cache
+          run: aws cloudfront create-invalidation --distribution-id ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"

@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: read
-  id-token: write
 
 env:
   SITE_URL: ${{ vars.SITE_URL || 'https://www.rayanhameed.com' }}
@@ -49,12 +48,3 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
-  oidc-validation:
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-    steps:
-      - uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          aws-region: ${{ vars.AWS_REGION || 'ap-southeast-4' }}
-      - run: aws sts get-caller-identity
