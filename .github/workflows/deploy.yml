@@ -23,7 +23,13 @@ jobs:
             aws-region: ${{ vars.AWS_REGION || 'ap-southeast-4' }}
         - run: aws sts get-caller-identity
         - name: Terraform initialization
-          run: terraform -chdir=infra init
+          run: |
+            terraform -chdir=infra init \
+                -backend-config="bucket=${{ vars.TF_STATE_BUCKET }}" \
+                -backend-config="key=${{ vars.TF_STATE_KEY }}" \
+                -backend-config="region=${{ vars.AWS_REGION || 'ap-southeast-4' }}" \
+                -backend-config="dynamodb_table=${{ vars.TF_LOCK_TABLE }}" \
+                -backend-config="encrypt=true"
         - name: Terraform plan
           run: terraform -chdir=infra plan -out=tfplan
         - name: Terraform apply
