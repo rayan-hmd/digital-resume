@@ -43,6 +43,22 @@ resource "aws_cloudfront_distribution" "resume_cdn" {
     }
   }
 
+  # Route unknown paths back to the SPA entry point so React Router can
+  # render client-side routes such as /notes on refresh or direct visit.
+  custom_error_response {
+    error_code            = 403
+    response_code         = 200
+    response_page_path    = "/index.html"
+    error_caching_min_ttl = 0
+  }
+
+  custom_error_response {
+    error_code            = 404
+    response_code         = 200
+    response_page_path    = "/index.html"
+    error_caching_min_ttl = 0
+  }
+
   tags = {
     Name = "resume"
   }
