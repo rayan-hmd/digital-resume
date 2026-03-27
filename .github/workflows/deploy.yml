@@ -19,12 +19,26 @@ jobs:
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@v4
+        - uses: actions/setup-node@v4
+          with:
+            node-version: lts/*
+            cache: npm
+            cache-dependency-path: frontend/package-lock.json
         - uses: hashicorp/setup-terraform@v4
         - uses: aws-actions/configure-aws-credentials@v4
           with:
             role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
             aws-region: ${{ vars.AWS_REGION || 'ap-southeast-4' }}
         - run: aws sts get-caller-identity
+        - name: Install frontend dependencies
+          working-directory: frontend
+          run: npm ci
+
+        - name: Build frontend
+          working-directory: frontend
+          env:
+              VITE_API_URL: ${{ vars.API_URL }}
+          run: npm run build
         - name: Terraform initialization
           run: |
             terraform -chdir=infra init \
@@ -38,6 +52,6 @@ jobs:
         - name: Terraform apply
           run: terraform -chdir=infra apply -auto-approve tfplan
         - name: sync S3 bucket
-          run: aws s3 sync frontend/ s3://${{ vars.S3_BUCKET_NAME || 'rayanhameed-resume' }} --delete
+          run: aws s3 sync frontend/dist/ s3://${{ vars.S3_BUCKET_NAME || 'rayanhameed-resume' }} --delete
         - name: Invalidate CloudFront cache
           run: aws cloudfront create-invalidation --distribution-id ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
