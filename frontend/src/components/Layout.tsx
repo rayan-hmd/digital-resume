@@ -91,7 +91,7 @@ export const Footer = () => {
             <a href="https://github.com/rayan-hmd" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white transition-colors">
               <Github className="h-5 w-5" />
             </a>
-            <a href="https://linkedin.com/in/rayan-hameed" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white transition-colors">
+            <a href="https://linkedin.com/in/rayanhameed" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white transition-colors">
               <Linkedin className="h-5 w-5" />
             </a>
             <a href="mailto:rayanhameedd@gmail.com" className="text-zinc-500 hover:text-white transition-colors">

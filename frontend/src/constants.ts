@@ -13,6 +13,18 @@ export const PROJECTS: Project[] = [
     githubUrl: 'https://github.com/rayan-hmd/digital-resume',
     challenges: 'Setting up S3 Remote State with DynamoDB locking.'
   },
+  {
+    id: 'devsecops-sensor-monitoring',
+    title: 'DevSecOps Sensor Monitoring Lab',
+    shortDescription: 'Built a containerised sensor simulation with real-time monitoring, alerting, and dashboards using Prometheus and Grafana.',
+    fullDescription: 'A DevSecOps-focused project that simulates RADAR, SONAR, and COMMS systems generating real-time events, exposes metrics via a Python application, and uses Prometheus and Grafana to monitor system health, visualise trends, and trigger alerts. The application is containerised with Docker and designed to integrate with CI/CD pipelines and Kubernetes for scalable deployment.',
+    problem: 'I wanted a project that demonstrated real DevSecOps practices beyond basic scripting, including observability, containerisation, monitoring, and alerting in a system that resembles real-world operational environments.',
+    solution: 'I developed a Python-based sensor simulator that generates structured logs and Prometheus metrics, containerised it using Docker, and integrated Prometheus for metrics scraping and alert rule evaluation. I then configured Grafana dashboards to visualise system behaviour and implemented alerting for error spikes, warning thresholds, and potential system failures.',
+    impact: 'Created an end-to-end monitoring pipeline that simulates real operational systems, demonstrating observability, alerting, and container-based deployment. The project showcases practical DevSecOps skills and the ability to build production-style monitoring systems from scratch.',
+    techStack: ['Python', 'Docker', 'Prometheus', 'Grafana', 'GitHub Actions', 'Kubernetes'],
+    githubUrl: 'https://github.com/rayan-hmd/secure-ci-cd-demo', // update if needed
+    challenges: 'Configuring Prometheus scraping across Docker networking, resolving metrics exposure issues, and correctly implementing alert rules that trigger meaningfully without constant false positives.'
+  },
   
 ];
 
@@ -47,8 +59,8 @@ export const EDUCATION: Education[] = [
 export const SKILLS = {
   cloud: ['AWS', 'Azure'],
   programming: ['Python', 'Bash', 'Java', 'JavaScript'],
-  tools: ['Terraform', 'Docker', 'GitHub Actions', 'Wireshark', 'Linux', 'VirusTotal', 'Phishing Analysis'],
-  security: ['Networking', 'Attack Analysis', 'Malware Analysis', 'Cryptography', 'IAM'],
+  tools: ['Terraform', 'Docker', 'GitHub Actions'],
+  security: ['Networking', 'Attack Analysis', 'Malware Analysis', 'Cryptography', 'Wireshark', 'Linux', 'VirusTotal', 'Phishing Analysis', 'IAM'],
   frameworks: ['MITRE ATT&CK', 'OWASP Top 10', 'NIST Cybersecurity Framework', 'ASD Information Security Manual'],
 };
 

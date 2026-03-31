@@ -47,6 +47,14 @@ export const Home = () => {
     },
   ];
 
+  const skillCategories = [
+    { title: 'Cloud Platforms', skills: SKILLS.cloud, accent: 'text-indigo-400' },
+    { title: 'Programming', skills: SKILLS.programming, accent: 'text-purple-400' },
+    { title: 'Tools & DevOps', skills: SKILLS.tools, accent: 'text-pink-400' },
+    { title: 'Security', skills: SKILLS.security, accent: 'text-cyan-400', className: 'xl:col-span-2' },
+    { title: 'Frameworks', skills: SKILLS.frameworks, accent: 'text-emerald-400' },
+  ];
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -61,12 +69,14 @@ export const Home = () => {
       <div className="bg-blob bottom-[10%] left-[20%] h-[400px] w-[400px] bg-pink-500 delay-1000"></div>
 
       <section className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-        <div className="mb-6 inline-flex items-center rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-1 text-xs font-medium text-indigo-300 backdrop-blur-sm">
-          <span className="mr-2 flex h-2 w-2 rounded-full bg-indigo-400 animate-pulse"></span>
-          Available for new opportunities
-        </div>
-        <div className="mb-4 inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.24em] text-zinc-400 backdrop-blur-sm">
-          Melbourne, Australia
+        <div className="mb-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+          <div className="inline-flex items-center rounded-full border border-indigo-500/20 bg-indigo-500/10 px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.24em] text-indigo-300 backdrop-blur-sm">
+            <span className="mr-2 flex h-2 w-2 rounded-full bg-indigo-400 animate-pulse"></span>
+            Available for new opportunities
+          </div>
+          <div className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] font-medium uppercase tracking-[0.24em] text-zinc-400 backdrop-blur-sm">
+            Melbourne, Australia
+          </div>
         </div>
         <h1 className="text-5xl font-black tracking-tight text-white sm:text-7xl md:text-8xl">
           <span className="sm:whitespace-nowrap">Rayan </span>
@@ -163,49 +173,55 @@ export const Home = () => {
             end-to-end delivery.
           </p>
         </div>
-        <div className="space-y-8">
+        <div className="grid gap-6 xl:grid-cols-2">
           {PROJECTS.map((project) => (
-            <div key={project.id} className="group glass rounded-3xl p-8 transition-all hover:shadow-2xl hover:shadow-purple-500/5 md:p-10">
-              <div className="mb-8 flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
-                <div>
+            <div key={project.id} className="group glass flex h-full flex-col rounded-3xl p-6 transition-all hover:-translate-y-1 hover:shadow-2xl hover:shadow-purple-500/5 md:p-7">
+              <div className="mb-5 flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                <div className="min-w-0">
                   <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400 ring-1 ring-white/5">
                     <Cloud className="h-6 w-6" />
                   </div>
                   <h3 className="text-2xl font-bold text-white">{project.title}</h3>
-                  <p className="mt-3 max-w-3xl text-base leading-7 text-zinc-400">{project.shortDescription}</p>
+                  <p className="mt-3 text-base leading-7 text-zinc-400">{project.shortDescription}</p>
                 </div>
                 <a
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 self-start rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+                  aria-label={`View ${project.title} repository on GitHub`}
+                  title="View GitHub repository"
+                  className="inline-flex items-center self-start rounded-xl border border-white/10 bg-white/5 p-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
                 >
                   <Github className="h-4 w-4" />
-                  View Repo
                 </a>
               </div>
 
-              <div className="grid gap-6 lg:grid-cols-3">
-                <div className="rounded-2xl border border-white/5 bg-white/5 p-6">
+              <p className="rounded-2xl border border-white/5 bg-white/5 p-5 text-sm leading-7 text-zinc-300">
+                {project.fullDescription}
+              </p>
+
+              <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-white/5 bg-white/5 p-5">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">Problem</p>
                   <p className="mt-3 text-sm leading-7 text-zinc-300">{project.problem}</p>
                 </div>
-                <div className="rounded-2xl border border-white/5 bg-white/5 p-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">Solution</p>
-                  <p className="mt-3 text-sm leading-7 text-zinc-300">{project.solution}</p>
-                </div>
-                <div className="rounded-2xl border border-white/5 bg-white/5 p-6">
+                <div className="rounded-2xl border border-white/5 bg-white/5 p-5">
                   <p className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">Impact</p>
                   <p className="mt-3 text-sm leading-7 text-zinc-300">{project.impact}</p>
                 </div>
               </div>
 
-              <div className="mt-6 rounded-2xl border border-dashed border-white/10 bg-zinc-950/40 p-5">
+              <div className="mt-5 rounded-2xl border border-dashed border-white/10 bg-zinc-950/40 p-5">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">Approach</p>
+                <p className="mt-3 text-sm leading-7 text-zinc-300">{project.solution}</p>
+              </div>
+
+              <div className="mt-4 rounded-2xl border border-dashed border-white/10 bg-zinc-950/40 p-5">
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500">Challenge</p>
                 <p className="mt-3 text-sm leading-7 text-zinc-400">{project.challenges}</p>
               </div>
 
-              <div className="mt-8 flex flex-wrap gap-2">
+              <div className="mt-6 flex flex-wrap gap-2">
                 {project.techStack.map((tech) => (
                   <span key={tech} className="rounded-lg border border-white/5 bg-white/5 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-zinc-500">
                     {tech}
@@ -224,59 +240,19 @@ export const Home = () => {
           </div>
           <h2 className="text-2xl font-bold text-white">Technical Skills</h2>
         </div>
-        <div className="grid gap-8 md:grid-cols-3">
-          <div className="glass rounded-2xl p-8 transition-transform hover:-translate-y-1">
-            <h3 className="mb-6 text-sm font-bold uppercase tracking-wider text-indigo-400">Cloud Platforms</h3>
-            <div className="flex flex-wrap gap-2">
-              {SKILLS.cloud.map((skill) => (
-                <span key={skill} className="rounded-lg border border-white/5 bg-white/5 px-3 py-1.5 text-xs font-medium text-zinc-300 shadow-sm">
-                  {skill}
-                </span>
-              ))}
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {skillCategories.map(({ title, skills, accent, className }) => (
+            <div key={title} className={`glass rounded-2xl p-8 transition-transform hover:-translate-y-1 ${className ?? ''}`}>
+              <h3 className={`mb-6 text-sm font-bold uppercase tracking-wider ${accent}`}>{title}</h3>
+              <div className="flex flex-wrap gap-2">
+                {skills.map((skill) => (
+                  <span key={skill} className="rounded-lg border border-white/5 bg-white/5 px-3 py-1.5 text-xs font-medium text-zinc-300 shadow-sm">
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-          <div className="glass rounded-2xl p-8 transition-transform hover:-translate-y-1">
-            <h3 className="mb-6 text-sm font-bold uppercase tracking-wider text-purple-400">Programming</h3>
-            <div className="flex flex-wrap gap-2">
-              {SKILLS.programming.map((skill) => (
-                <span key={skill} className="rounded-lg border border-white/5 bg-white/5 px-3 py-1.5 text-xs font-medium text-zinc-300 shadow-sm">
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="glass rounded-2xl p-8 transition-transform hover:-translate-y-1">
-            <h3 className="mb-6 text-sm font-bold uppercase tracking-wider text-pink-400">Tools & DevOps</h3>
-            <div className="flex flex-wrap gap-2">
-              {SKILLS.tools.map((skill) => (
-                <span key={skill} className="rounded-lg border border-white/5 bg-white/5 px-3 py-1.5 text-xs font-medium text-zinc-300 shadow-sm">
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="mt-8 grid gap-8 md:grid-cols-2">
-          <div className="glass rounded-2xl p-8 transition-transform hover:-translate-y-1">
-            <h3 className="mb-6 text-sm font-bold uppercase tracking-wider text-cyan-400">Security</h3>
-            <div className="flex flex-wrap gap-2">
-              {SKILLS.security.map((skill) => (
-                <span key={skill} className="rounded-lg border border-white/5 bg-white/5 px-3 py-1.5 text-xs font-medium text-zinc-300 shadow-sm">
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="glass rounded-2xl p-8 transition-transform hover:-translate-y-1">
-            <h3 className="mb-6 text-sm font-bold uppercase tracking-wider text-emerald-400">Frameworks</h3>
-            <div className="flex flex-wrap gap-2">
-              {SKILLS.frameworks.map((skill) => (
-                <span key={skill} className="rounded-lg border border-white/5 bg-white/5 px-3 py-1.5 text-xs font-medium text-zinc-300 shadow-sm">
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
