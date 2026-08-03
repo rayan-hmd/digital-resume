@@ -6,11 +6,25 @@ import {
 
 import { AnimatedName } from '../components/AnimatedName';
 import { SITE_LINKS } from '../constants';
+import { useVisitorCounter } from '../hooks/useVisitorCounter';
 
 export const Home = () => {
+  const { count, loading, error } = useVisitorCounter();
+
   return (
     <main className="relative grid min-h-svh place-items-center px-4 py-16 sm:px-6 lg:px-8">
       <div className="grid w-full max-w-[85vw] -translate-y-8 gap-6 px-6 text-center">
+        <p
+          id="visitor-count"
+          className="departure-mono mx-auto -mb-1 text-sm uppercase tracking-[0.32em] text-zinc-400 sm:text-base"
+        >
+          {loading
+            ? 'Visitor Count: Loading...'
+            : error || count === null
+              ? 'Visitor Count: Unavailable'
+              : `Visitor Count: ${count}`}
+        </p>
+
         <div className="name-outer w-full">
           <AnimatedName className="name-inner mx-auto w-full max-w-[85vw] text-[clamp(3.5rem,10vw,12rem)] font-normal leading-[0.95] tracking-[-0.03em]">
             Rayan Hameed

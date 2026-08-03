@@ -8,10 +8,10 @@ export const Projects = () => {
       <div className="mb-10 w-full max-w-3xl text-center sm:text-left">
         <p className="departure-mono text-sm font-semibold uppercase tracking-[0.24em] text-zinc-400">Projects</p>
         <h1 className="redaction mt-3 text-[clamp(2rem,4.5vw,3rem)] font-bold leading-[0.95] tracking-[-0.02em] text-white">
-          A few focused projects.
+          My Projects
         </h1>
         <p className="mt-4 text-base leading-7 text-zinc-400">
-          These are small, practical builds that cover cloud, automation, and simple full-stack delivery.
+          Some stuff I built.
         </p>
       </div>
 
