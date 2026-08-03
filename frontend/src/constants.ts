@@ -68,3 +68,11 @@ export const LEARNING_TOPICS = [
   'Kubernetes & Container Orchestration',
   'AWS Certified Solutions Architect - Associate',
 ];
+
+export const SITE_LINKS = {
+  projects: 'https://rayanhameed.com/projects',
+  blog: 'https://rayanhameed.com/blog',
+  github: 'https://github.com/rayan-hmd',
+  linkedin: 'https://www.linkedin.com/in/rayanhameed',
+  location: 'Melbourne, Australia',
+};
